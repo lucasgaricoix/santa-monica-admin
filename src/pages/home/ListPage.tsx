@@ -7,7 +7,34 @@ type Books = {
   name: string;
   email: string;
   bookDate: Date;
+  coolMessage: string;
+  isConfirmed: boolean;
 };
+
+const localization = {
+  header: {
+    actions: 'Ações'
+  },
+  body: {
+    emptyDataSourceMessage: 'Sem registros',
+    addTooltip: 'Adicionar',
+    editTooltip: 'Editar',
+    deleteTooltip: 'Excluir',
+    editRow: {
+      saveTooltip: 'Salvar',
+      cancelTooltip: 'Cancelar',
+      deleteText: 'Tem certeza que deseja excluir este registro?'
+    }
+  },
+  toolbar: {
+    searchTooltip: 'Pesquisar',
+    searchPlaceholder: 'Pesquisar'
+  },
+  pagination: {
+    labelRowsSelect: 'Linhas',
+    labelDisplayedRows: '{from}-{to} de {count}'
+  }
+}
 
 function ListPage() {
   const [books, setBooks] = useState<Books[]>([]);
@@ -41,6 +68,9 @@ function ListPage() {
       .then(() => {
         loadBooks();
       })
+      .catch(error => {
+        console.log('Erro ao excluir registro.')
+      })
       .finally(() => setLoading(false));
   }
 
@@ -62,8 +92,16 @@ function ListPage() {
       columns={[
         { title: "Nome", field: "name", type: "string" },
         { title: "E-mail", field: "email", type: "string" },
-        { title: "Data da Reserva", field: "bookDate", type: "date" }
+        { title: "Telefone", field: "phoneNumber", type: "string"},
+        { title: "Data da Reserva", 
+          field: "bookDate",
+          type: "date", 
+          render: books => <div>{new Date(books.bookDate).toLocaleDateString()}</div>
+        },
+        {title: "Mensagem", field: "coolMessage", type: "string"},
+        { title: "Confirmado", field: "isConfirmed", type: "boolean" }
       ]}
+      localization={localization}
       data={books}
       isLoading={loading}
       editable={{
