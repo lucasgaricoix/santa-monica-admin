@@ -95,19 +95,20 @@ function ListPage() {
         { title: "Telefone", field: "phoneNumber", type: "string"},
         { title: "Data da Reserva", 
           field: "bookDate",
-          type: "date", 
+          type: "date",
+          defaultSort: 'desc',
           render: books => <div>{new Date(books.bookDate).toLocaleDateString()}</div>
         },
-        {title: "Mensagem", field: "coolMessage", type: "string"},
-        { title: "Confirmado", field: "isConfirmed", type: "boolean" }
+        { title: "Observação", field: "coolMessage", type: "string" },
+        { title: "Confirmado", field: "isConfirmed", type: "boolean", initialEditValue: true }
       ]}
+      options={{pageSize: 10}}
       localization={localization}
       data={books}
       isLoading={loading}
       editable={{
         onRowAdd: newData =>
           new Promise(resolve => {
-            console.log(newData);
             setTimeout(() => {
               resolve(createData(newData));
             }, 600);
