@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Button, Toolbar, IconButton, Typography } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
 import { Menu } from '@material-ui/icons'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
@@ -28,7 +28,6 @@ function Navigation() {
           <Typography variant="h6" className={classes.title}>
             Santa Mônica Admin
           </Typography>
-          <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
   )
